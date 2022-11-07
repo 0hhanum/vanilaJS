@@ -14,7 +14,7 @@ function Product({ $target, initialState }) {
     ${this.state
       .map(
         (product) => `
-      <li class="Product">
+      <li class="Product" data-product-id="${product.id}">
         <img src="${product.imageUrl}">
         <div class="Product__info">
           <div>${product.name}</div>
@@ -27,5 +27,9 @@ function Product({ $target, initialState }) {
     `;
   };
   this.render();
+  $productList.addEventListener("click", (e) => {
+    const $li = e.target.closest("li");
+    const { productId } = $li.dataset;
+  });
 }
 export default Product;

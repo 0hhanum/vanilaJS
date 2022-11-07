@@ -28,6 +28,7 @@ export const init = (onRouteChange) => {
 };
 export const routeChange = (url, params) => {
   history.pushState(null, null, url);
+  // window 에 커스텀 이벤트 ROUTE_CHANGE_EVENT 를 발생시켜 이벤트리스너가 동작하도록함
   window.dispatchEvent(new CustomEvent(ROUTE_CHANGE_EVENT, params));
 };
 export default Router;
