@@ -1,6 +1,7 @@
 const API_END_POINT = "http://localhost:8000";
 export const fetchProducts = async () => {
-  return await (await fetch(`${API_END_POINT}/products`)).json();
+  const data = await (await fetch(`${API_END_POINT}/products`)).json();
+  return data;
 };
 export const fetchProduct = async (id) => {
   return await (

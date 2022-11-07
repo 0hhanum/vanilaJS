@@ -5,7 +5,8 @@ function ProductList({ $target }) {
   $page.className = "ProductListPage";
   $page.innerHTML = "<h1>상품 목록</h1>";
   this.render = async () => {
-    await fetchProducts();
+    const data = await fetchProducts();
+    console.log(data);
     $target.appendChild($page);
   };
 }
