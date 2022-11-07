@@ -1,3 +1,5 @@
+import { routeChange } from "../Router.js";
+
 function Product({ $target, initialState }) {
   const $productList = document.createElement("ul");
   $target.appendChild($productList);
@@ -30,6 +32,9 @@ function Product({ $target, initialState }) {
   $productList.addEventListener("click", (e) => {
     const $li = e.target.closest("li");
     const { productId } = $li.dataset;
+    if (productId) {
+      routeChange(`/products/${productId}`);
+    }
   });
 }
 export default Product;
