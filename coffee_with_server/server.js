@@ -11,18 +11,14 @@ app.get("/", (req, res) => {
   res.sendFile(path.resolve("src", "index.html"));
 });
 app.get("/products", (req, res) => {
+  console.log("[GET] Products list request");
   axios
     .get(
       "https://h6uc5l8b1g.execute-api.ap-northeast-2.amazonaws.com/dev/products"
     )
     .then((response) => {
       res.send(response.data);
-    })
-    .catch((error) => {
-      console.error(error);
-      res.send(500);
     });
-  // res.send(data);
 });
 
 app.get("/*", (req, res) => {
