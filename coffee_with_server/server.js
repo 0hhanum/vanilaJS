@@ -1,9 +1,11 @@
-const PORT = 8080;
-
-const http = require("http");
-const server = http.createServer((req, res) => {
-  res.writeHead(200, { "Content-Type": "text/plain" });
-  res.end("Hello World!");
+const PORT = process.env.PORT || 8000;
+const express = require("express");
+const path = require("path");
+const app = express();
+app.listen(PORT, () => {
+  console.log(`Server running on ${PORT}`);
 });
-server.listen(PORT);
-console.log(`Listening to ${PORT} PORT ~_~`);
+app.use("/src", express.static(path.resolve(__dirname, "src")));
+app.get("/", (req, res) => {
+  res.sendFile(path.resolve("src", "index.html"));
+});
