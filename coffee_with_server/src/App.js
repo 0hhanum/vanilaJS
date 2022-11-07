@@ -1,4 +1,4 @@
-import Router from "./Router.js";
+import Router, { init } from "./Router.js";
 
 function App({ $target }) {
   this.render = () => {
@@ -7,6 +7,7 @@ function App({ $target }) {
     $target.innerHTML = ""; // APP 비워주기
     component.render(); // 컴포넌트 받아와 렌더링
   };
+  init(this.render);
   this.render();
 }
 export default App;
