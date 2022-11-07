@@ -11,9 +11,11 @@ const routes = [
 function Router({ $target }) {
   this.getComponent = () => {
     const { pathname } = location;
+    console.log(`current path: ${pathname}`);
     const currentComponent = routes.find((route) => {
       return route.path.startsWith(pathname);
     });
+    console.log(currentComponent);
     return new currentComponent.component({ $target });
   };
 }
