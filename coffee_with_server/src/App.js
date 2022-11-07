@@ -8,6 +8,7 @@ function App({ $target }) {
     component.render(); // 컴포넌트 받아와 렌더링
   };
   init(this.render);
+  window.addEventListener("popstate", this.render);
   this.render();
 }
 export default App;
