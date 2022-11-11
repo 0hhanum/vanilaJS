@@ -34,10 +34,10 @@ function selectedOptions({ $target, initialState }) {
                   selectedOption.optionId
                 }" value="${selectedOption.quantity}">
             </li>
-            <div class="ProductDetail__totalPrice">${this.getTotalPrice()}원</div>
             `
               )
               .join("")}
+            <div class="ProductDetail__totalPrice">${this.getTotalPrice()}원</div>
             <button class="OrderButton">주문하기</button>
         `;
     }

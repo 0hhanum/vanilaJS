@@ -54,10 +54,15 @@ function ProductDetailComponent({ $target, initialState }) {
     });
   };
   this.render();
-  // 선택 옵션
+  // 옵션 선택 이벤트
+  // 부모에게 달아서 자식 노드에서 일어난 이벤트 감지
   $productDetail.addEventListener("change", (event) => {
     const { product, selectedOptions } = this.state;
     const optionId = event.target.value;
+    // 이미 추가된 옵션이면 추가 X
+    if (selectedOptions.find((option) => +option.optionId === +optionId)) {
+      return;
+    }
     const targetOption = product.productOptions.find(
       (productOption) => +productOption.id === +optionId
     );
@@ -68,6 +73,7 @@ function ProductDetailComponent({ $target, initialState }) {
       quantity: 1,
     };
     selectedOptions.push(selectedOption);
+    // setState 호출해 SeletedOptions 컴포넌트의 setState 도 호출
     this.setState({ ...this.state });
   });
 }
