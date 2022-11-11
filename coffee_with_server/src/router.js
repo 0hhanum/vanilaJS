@@ -14,15 +14,16 @@ function Router({ $target }) {
     const { pathname } = location;
     console.log(`current path: ${pathname}`);
     let currentComponent;
+    let componentProps = {};
     if (pathname.startsWith("/products")) {
       currentComponent = routes[1];
+      componentProps.productId = pathname.split("/")[2];
     } else {
       currentComponent = routes.find((route) => {
         return route.path.startsWith(pathname);
       });
     }
-    console.log(currentComponent);
-    return new currentComponent.component({ $target });
+    return new currentComponent.component({ $target, ...componentProps });
   };
 }
 

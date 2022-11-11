@@ -11,13 +11,14 @@ function ProductList({ $target }) {
   this.setState = (nextState) => {
     this.state = nextState;
   };
+  const product = new Product({
+    $target: $page,
+    initialState: this.state,
+  });
   const getProducts = async () => {
     const products = await fetchProducts();
     this.setState(products);
-    new Product({
-      $target: $page,
-      initialState: this.state,
-    });
+    product.setState(products);
   };
   getProducts();
 }

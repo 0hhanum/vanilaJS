@@ -20,6 +20,17 @@ app.get("/products", (req, res) => {
       res.send(response.data);
     });
 });
+app.get("/product/:id", (req, res) => {
+  console.log("[GET] Products detail request");
+  console.log(req.params.id);
+  axios
+    .get(
+      `https://h6uc5l8b1g.execute-api.ap-northeast-2.amazonaws.com/dev/products/${req.params.id}`
+    )
+    .then((response) => {
+      res.send(response.data);
+    });
+});
 
 app.get("/*", (req, res) => {
   res.redirect("/");

@@ -17,7 +17,6 @@ export const fetchProducts = async () => {
   return data;
 };
 export const fetchProduct = async (id) => {
-  return await fetch(
-    `https://h6uc5l8b1g.execute-api.ap-northeast-2.amazonaws.com/dev/products/${id}`
-  );
+  const data = await request(`/product/${id}`);
+  return data;
 };
