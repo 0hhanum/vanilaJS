@@ -13,6 +13,7 @@ function ProductDetailComponent({ $target, initialState }) {
     this.render();
     if (selectedOptions) {
       selectedOptions.setState({
+        product: this.state.product,
         selectedOptions: this.state.selectedOptions,
       });
     }
@@ -57,9 +58,10 @@ function ProductDetailComponent({ $target, initialState }) {
   // 옵션 선택 이벤트
   // 부모에게 달아서 자식 노드에서 일어난 이벤트 감지
   $productDetail.addEventListener("change", (event) => {
+    if (event.target.tagName !== "SELECT") return;
     const { product, selectedOptions } = this.state;
     const optionId = event.target.value;
-    // 이미 추가된 옵션이면 추가 X
+    // 이미 추가된 옵션이면 추가 중지
     if (selectedOptions.find((option) => +option.optionId === +optionId)) {
       return;
     }

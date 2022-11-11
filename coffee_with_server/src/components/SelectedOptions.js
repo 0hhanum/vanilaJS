@@ -30,7 +30,7 @@ function selectedOptions({ $target, initialState }) {
                 ${selectedOption.optionName} ${
                   product.price + selectedOption.optionPrice
                 }원
-                <input type="text" data-optionId="${
+                <input type="number" data-optionId="${
                   selectedOption.optionId
                 }" value="${selectedOption.quantity}">
             </li>
@@ -43,5 +43,34 @@ function selectedOptions({ $target, initialState }) {
     }
   };
   this.render();
+  $component.addEventListener("input", (e) => {
+    // 이벤트가 INPUT 태그에서 발생한 경우에만 처리
+    if (e.target.tagName === "INPUT") {
+      let quantity = +e.target.value;
+      try {
+        const targetOptionId = e.target.dataset.optionid;
+        const selectedOptions = [...this.state.selectedOptions];
+        const {
+          product: { productOptions },
+        } = this.state;
+        const option = productOptions.find(
+          (option) => option.id === +targetOptionId
+        );
+        const targetOptionState = selectedOptions.find(
+          (option) => option.optionId === targetOptionId
+        );
+        // 재고 숫자를 넘을 수 없음. 음수도 불가능
+        if (quantity > option.stock) {
+          quantity = option.stock;
+        } else if (quantity < 0) {
+          quantity = 0;
+        }
+        targetOptionState.quantity = quantity;
+        this.setState({ ...this.state });
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  });
 }
 export default selectedOptions;
