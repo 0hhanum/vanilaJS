@@ -55,8 +55,20 @@ function ProductDetailComponent({ $target, initialState }) {
   };
   this.render();
   // 선택 옵션
-  $productDetail.addEventListener("change", (e) => {
-    console.log(e);
+  $productDetail.addEventListener("change", (event) => {
+    const { product, selectedOptions } = this.state;
+    const optionId = event.target.value;
+    const targetOption = product.productOptions.find(
+      (productOption) => +productOption.id === +optionId
+    );
+    const selectedOption = {
+      optionId: event.target.value,
+      optionPrice: targetOption.price,
+      optionName: targetOption.name,
+      quantity: 1,
+    };
+    selectedOptions.push(selectedOption);
+    this.setState({ ...this.state });
   });
 }
 export default ProductDetailComponent;
