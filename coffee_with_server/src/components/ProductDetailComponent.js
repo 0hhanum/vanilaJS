@@ -1,11 +1,21 @@
+import SelectedOptions from "./SelectedOptions.js";
+
 function ProductDetailComponent({ $target, initialState }) {
   const $productDetail = document.createElement("div");
+  // SelectedOption 컴포넌트
+  let selectedOptions = null;
   $productDetail.className = "ProductDetail";
   $target.appendChild($productDetail);
+
   this.state = initialState;
   this.setState = (nextState) => {
     this.state = nextState;
     this.render();
+    if (selectedOptions) {
+      selectedOptions.setState({
+        selectedOptions: this.state.selectedOptions,
+      });
+    }
   };
   this.render = () => {
     const { product } = this.state;
@@ -32,9 +42,21 @@ function ProductDetailComponent({ $target, initialState }) {
             )
             .join("")}
         </select>
+        <div class="ProductDetail__selectedOptions"></div>
       </div>
     `;
+    selectedOptions = new SelectedOptions({
+      $target: $productDetail.querySelector(".ProductDetail__selectedOptions"),
+      initialState: {
+        product: this.state.product,
+        selectedOptions: this.state.selectedOptions,
+      },
+    });
   };
   this.render();
+  // 선택 옵션
+  $productDetail.addEventListener("change", (e) => {
+    console.log(e);
+  });
 }
 export default ProductDetailComponent;
