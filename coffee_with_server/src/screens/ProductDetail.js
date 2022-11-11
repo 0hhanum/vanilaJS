@@ -1,5 +1,5 @@
 import { fetchProduct } from "../api.js";
-
+import ProductDetailComponent from "../components/ProductDetailComponent.js";
 function ProductDetail({ $target, productId }) {
   this.state = {
     productId,
@@ -10,7 +10,7 @@ function ProductDetail({ $target, productId }) {
     this.render();
   };
   const $page = document.createElement("div");
-  $page.className = "ProductListPage";
+  $page.className = "ProductDetailPage";
   $page.innerHTML = "<h1>상품 정보</h1>";
   this.render = () => {
     if (!this.state.product) {
@@ -18,6 +18,13 @@ function ProductDetail({ $target, productId }) {
     } else {
       $target.innerHTML = "";
       $target.appendChild($page);
+      new ProductDetailComponent({
+        $target: $page,
+        initialState: {
+          product: this.state.product,
+          selectedOptions: [],
+        },
+      });
     }
   };
   this.getProduct = async () => {
