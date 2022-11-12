@@ -1,4 +1,4 @@
-import Cart from "./screens/Cart.js";
+import CartPage from "./screens/CartPage.js";
 import ProductDetail from "./screens/ProductDetail.js";
 import ProductList from "./screens/ProductList.js";
 
@@ -6,7 +6,7 @@ const ROUTE_CHANGE_EVENT = "ROUTE_CHANGE";
 const routes = [
   { path: "/", component: ProductList },
   { path: "/products/:id", component: ProductDetail },
-  { path: "/cart", component: Cart },
+  { path: "/cart", component: CartPage },
 ];
 
 function Router({ $target }) {

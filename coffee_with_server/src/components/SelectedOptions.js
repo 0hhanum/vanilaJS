@@ -81,13 +81,14 @@ function selectedOptions({ $target, initialState }) {
   // component 자체에 리스너를 달고 target 이 눌렸는지 처리하는듯함
   $component.addEventListener("click", (e) => {
     const { selectedOptions } = this.state;
+    const { product } = this.state;
     if (e.target.className === "OrderButton") {
       const cartData = getItem("products_cart", []);
       setItem(
         "products_cart",
         cartData.concat(
           selectedOptions.map((selectedOption) => ({
-            productId: selectedOption.productId,
+            productId: product.id,
             optionId: selectedOption.optionId,
             quantity: selectedOption.quantity,
           }))
