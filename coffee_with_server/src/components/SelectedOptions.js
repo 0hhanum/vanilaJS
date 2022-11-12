@@ -43,7 +43,7 @@ function selectedOptions({ $target, initialState }) {
     }
   };
   this.render();
-  $component.addEventListener("input", (e) => {
+  $component.addEventListener("change", (e) => {
     // 이벤트가 INPUT 태그에서 발생한 경우에만 처리
     if (e.target.tagName === "INPUT") {
       let quantity = +e.target.value;
@@ -67,6 +67,10 @@ function selectedOptions({ $target, initialState }) {
         }
         targetOptionState.quantity = quantity;
         this.setState({ ...this.state });
+        // $component.querySelector(`[data-optionId='${targetOptionId}']`).focus();
+        console.log(
+          $component.querySelector(`[data-optionId='${targetOptionId}']`)
+        );
       } catch (e) {
         console.error(e);
       }
