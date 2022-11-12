@@ -67,10 +67,7 @@ function selectedOptions({ $target, initialState }) {
         }
         targetOptionState.quantity = quantity;
         this.setState({ ...this.state });
-        // $component.querySelector(`[data-optionId='${targetOptionId}']`).focus();
-        console.log(
-          $component.querySelector(`[data-optionId='${targetOptionId}']`)
-        );
+        $component.querySelector(`[data-optionId='${targetOptionId}']`).focus();
       } catch (e) {
         console.error(e);
       }

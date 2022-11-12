@@ -20,7 +20,8 @@ function ProductDetailComponent({ $target, initialState }) {
   };
   this.render = () => {
     const { product } = this.state;
-    $productDetail.innerHTML = `
+    if (!this.state.renderedFlag) {
+      $productDetail.innerHTML = `
       <img src="${product.imageUrl}">
       <div class="ProductDetail__info">
         <h2>${product.name}</h2>
@@ -46,13 +47,17 @@ function ProductDetailComponent({ $target, initialState }) {
         <div class="ProductDetail__selectedOptions"></div>
       </div>
     `;
-    selectedOptions = new SelectedOptions({
-      $target: $productDetail.querySelector(".ProductDetail__selectedOptions"),
-      initialState: {
-        product: this.state.product,
-        selectedOptions: this.state.selectedOptions,
-      },
-    });
+      selectedOptions = new SelectedOptions({
+        $target: $productDetail.querySelector(
+          ".ProductDetail__selectedOptions"
+        ),
+        initialState: {
+          product: this.state.product,
+          selectedOptions: this.state.selectedOptions,
+        },
+      });
+    }
+    this.state.renderedFlag = true;
   };
   this.render();
   // 옵션 선택 이벤트
