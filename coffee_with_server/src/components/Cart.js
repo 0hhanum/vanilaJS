@@ -1,3 +1,6 @@
+import { routeChange } from "../Router.js";
+import { removeItem } from "../storage.js";
+
 export default function Cart({ $target, initialState }) {
   const $component = document.createElement("div");
   $component.className = "Cart";
@@ -32,6 +35,7 @@ export default function Cart({ $target, initialState }) {
     <div class="Cart__totalPrice">
         총 상품가격 ${this.getTotalPrice()}원
     </div>
+    <button class="OrderButton">주문하기</button>
     `;
   };
   this.getTotalPrice = () => {
@@ -40,5 +44,12 @@ export default function Cart({ $target, initialState }) {
       return acc + (item.price + item.selectedOption.price) * item.quantity;
     }, 0);
   };
+  $component.addEventListener("click", (e) => {
+    if (e.target.className === "OrderButton") {
+      alert("주문완료");
+      removeItem("products_cart");
+      routeChange("/");
+    }
+  });
   this.render();
 }
