@@ -1,12 +1,15 @@
 import { getItem } from "../storage.js";
 import { routeChange } from "../Router.js";
 import { fetchProduct } from "../api.js";
+import Cart from "../components/Cart.js";
 
 function CartPage({ $target }) {
   const cartData = getItem("products_cart", []);
   const $page = document.createElement("div");
-  $page.className = "ProductListPage";
+  $page.className = "CartPage";
   $page.innerHTML = "<h1>장바구니</h1>";
+  let cartComponent = null;
+
   this.state = {
     products: null,
   };
@@ -20,6 +23,12 @@ function CartPage({ $target }) {
       routeChange("/");
     } else {
       $target.appendChild($page);
+      if (this.state.products && !cartComponent) {
+        cartComponent = new Cart({
+          $target: $page,
+          initialState: this.state.products,
+        });
+      }
     }
   };
   this.fetchProduct = async () => {
@@ -30,11 +39,10 @@ function CartPage({ $target }) {
         const selectedOption = product.productOptions.find(
           (option) => option.id === +cartItem.optionId
         );
-        return { ...product, selectedOption };
+        return { ...product, selectedOption, quantity: cartItem.quantity };
       })
     );
-    this.setState(products);
-    console.log(products);
+    this.setState({ products });
   };
   this.fetchProduct();
 }

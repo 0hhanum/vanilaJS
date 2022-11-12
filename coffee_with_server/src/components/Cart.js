@@ -17,8 +17,12 @@ export default function Cart({ $target, initialState }) {
             <li class="Cart__item">
                 <img src="${cartItem.imageUrl}"
                 <div class="Cart__itemDescription">
-                    <div>${cartItem.name} ${cartItem.selectedOption.name}</div>
-                    <div>${cartItem.price + cartItem.selectedOption.price}</div>
+                    <div>${cartItem.name} ${cartItem.selectedOption.name} ${
+              cartItem.quantity
+            }개</div>
+                    <div>${
+                      cartItem.price + cartItem.selectedOption.price
+                    }원</div>
                 </div>
             </li>
         `
@@ -32,11 +36,9 @@ export default function Cart({ $target, initialState }) {
   };
   this.getTotalPrice = () => {
     // (가격 + 옵션가) * quantity 를 누산기로 더해서 총 합계 계산
-    return this.state.reduce(
-      (acc, item) =>
-        acc + (item.price + item.selectedOption.price) * item.quantity,
-      0
-    );
+    return this.state.reduce((acc, item) => {
+      return acc + (item.price + item.selectedOption.price) * item.quantity;
+    }, 0);
   };
   this.render();
 }
