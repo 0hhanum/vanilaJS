@@ -1,3 +1,6 @@
+import { getItem, setItem } from "../storage.js";
+import { routeChange } from "../Router.js";
+
 function selectedOptions({ $target, initialState }) {
   const $component = document.createElement("div");
   $target.appendChild($component);
@@ -72,6 +75,26 @@ function selectedOptions({ $target, initialState }) {
         console.error(e);
       }
     }
+  });
+  // 장바구니 담기 처리
+  // setState 를 통해 매번 새로 렌더링되니
+  // component 자체에 리스너를 달고 target 이 눌렸는지 처리하는듯함
+  $component.addEventListener("click", (e) => {
+    const { selectedOptions } = this.state;
+    if (e.target.className === "OrderButton") {
+      const cartData = getItem("products_cart", []);
+      setItem(
+        "products_cart",
+        cartData.concat(
+          selectedOptions.map((selectedOption) => ({
+            productId: selectedOption.productId,
+            optionId: selectedOption.optionId,
+            quantity: selectedOption.quantity,
+          }))
+        )
+      );
+    }
+    routeChange("/cart");
   });
 }
 export default selectedOptions;
