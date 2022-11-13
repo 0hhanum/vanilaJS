@@ -2,9 +2,16 @@ requirejs.config({
   baseUrl: "./src/lib",
   paths: {
     vue: "vue/vue",
+    "http-vue-loader": "http-vue-loader/http-vue-loader",
   },
 });
 
-require(["vue"], function (vue) {
-  console.log(vue);
+require(["vue", "http-vue-loader"], function (Vue, httpVueLoader) {
+  const vueApp = new Vue({
+    el: ".App",
+    components: {
+      "vue-component": httpVueLoader("./App.vue"),
+    },
+  });
+  console.log(vueApp);
 });
