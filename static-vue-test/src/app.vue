@@ -4,9 +4,6 @@
 
 <script>
 module.exports = {
-  data() {
-    return null;
-  },
   mounted() {
     console.log("마운트!");
   },

@@ -10,7 +10,7 @@ require(["vue", "http-vue-loader"], function (Vue, httpVueLoader) {
   const vueApp = new Vue({
     el: ".App",
     components: {
-      "vue-component": httpVueLoader("./App.vue"),
+      "vue-component": httpVueLoader("./src/App.vue"),
     },
   });
   console.log(vueApp);
