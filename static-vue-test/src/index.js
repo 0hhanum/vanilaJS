@@ -7,11 +7,10 @@ requirejs.config({
 });
 
 require(["vue", "http-vue-loader"], function (Vue, httpVueLoader) {
-  const vueApp = new Vue({
-    el: ".App",
-    components: {
-      "vue-component": httpVueLoader("./src/App.vue"),
-    },
-  });
-  console.log(vueApp);
+  Vue.use(httpVueLoader);
+  httpVueLoader.register(Vue, "./src/App.vue");
+
+  new Vue({
+    render: (h) => h(Vue.component("App")),
+  }).$mount(".App");
 });
